@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken } from 'polished'
+import { darken, transparentize } from 'polished'
 
 export const Container = styled.form`
     h2 {
@@ -61,35 +61,48 @@ export const TransactionTypeContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
+`
 
-    button {
-        height: 4rem;
+interface RadioBoxProps {
+    isActive: boolean
+    activeColor: 'green' | 'red'
+}
 
-        border-radius: 0.25rem;
-        border: 1px solid #d7d7d7;
+const colors = {
+    green: '#33cc95',
+    red: '#e52e4d',
+}
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+export const RadioBox = styled.button<RadioBoxProps>`
+    height: 4rem;
 
-        background: transparent;
+    border-radius: 0.25rem;
+    border: 1px solid #d7d7d7;
 
-        transition: border-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        &:hover {
-            border-color: ${darken(0.1, '#d7d7d7')}; // Darken, escureça em 10% (0.1) a cor '#D7D7D7'
-        }
+    background: ${props =>
+        props.isActive
+            ? transparentize(0.9, colors[props.activeColor])
+            : 'transparent'}; // Transparentize deixe 10% transparente a cor da minha variavel colors na posição igual a activeColor
 
-        img {
-            width: 20px;
-            height: 20px;
-        }
+    transition: border-color 0.2s ease-in-out;
 
-        span {
-            display: inline-block;
-            margin-left: 1rem;
-            font-size: 1rem;
-            color: var(--text-title);
-        }
+    &:hover {
+        border-color: ${darken(0.1, '#d7d7d7')}; // Darken, escureça em 10% (0.1) a cor '#D7D7D7'
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    span {
+        display: inline-block;
+        margin-left: 1rem;
+        font-size: 1rem;
+        color: var(--text-title);
     }
 `
