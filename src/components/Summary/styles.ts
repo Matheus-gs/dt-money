@@ -35,5 +35,10 @@ export const Container = styled.div`
             color: #fff;
             background: var(--green);
         }
+
+        &.HighlightDebtBackground {
+            color: #fff;
+            background: var(--red);
+        }
     }
 `
